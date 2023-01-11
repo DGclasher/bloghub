@@ -6,35 +6,48 @@
 {% block body %} 
 
 
-<div class="colour"></div>
-<div class="colour"></div>
-<div class="colour"></div>
-<div class="box">
-  <div class="square" style="--I: 0"></div>
-  <div class="square" style="--I: 1"></div>
-  <div class="square" style="--I: 2"></div>
-  <div class="square" style="--I: 3"></div>
-  <div class="square" style="--I: 4"></div>
-  <div class="container">
-    <div class="form">
-      <form action="{% url 'users:users-login' %}" method="post">
-        {% csrf_token %}
-        <fieldset class="form-group">
-          <legend class="border-bottom mb4">Login</legend>
-          {{ form|crispy }}
-        </fieldset>
-        <div class="form-group">
-          <button type="submit">Login</button>
-        </div>
-      </form>
-      <div class="border-top pt-3">
-        <small class="text-muted">
-          Need an account
-          <a href="{% url 'users:users-register' %}" class="ml-2">Register</a>
-        </small>
-      </div>
-    </div>
-  </div>
-</div>
+<Section>
+  <Div Class="Colour"></Div>
+  <Div Class="Colour"></Div>
+  <Div Class="Colour"></Div>
+  <Div Class="Box">
+      <Div Class="Square" Style="--I: 0"></Div>
+      <Div Class="Square" Style="--I: 1"></Div>
+      <Div Class="Square" Style="--I: 2"></Div>
+      <Div Class="Square" Style="--I: 3"></Div>
+      <Div Class="Square" Style="--I: 4"></Div>
+      <Div Class="Container">
+          <Div Class="Form">
+              <H2>Login Form</H2>
+              <Form>
+                  <Div Class="Input__box">
+                      <Input Type="Text" Placeholder="Username" />
+                  </Div>
+                  <Div Class="Input__box">
+                      <Input Type="Password" Placeholder="Password" />
+                  </Div>
+                  <Div Class="Input__box">
+                      <Input Type="Submit" Value="Login" />
+                  </Div>
+                  <P Class="Forget">
+                      Forgot Password? <A Href="#">Click Here</A>
+                  </P>
+                  <P Class="Forget">
+                      Don't Have An Account? <A Href="#">Sign Up</A>
+                  </P>
+              </Form>
+          </Div>
+      </Div>
+  </Div>
+</Section>
+
+
+
+
+
+
+
+
+
 
 {% endblock body %}
