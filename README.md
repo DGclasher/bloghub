@@ -1,25 +1,15 @@
-# bloghub
-write some blogs
+# BlogHub
 
-django application to write blogs
+:warning: Need to fix the frontend
 
-install the requirements
-```
-pip install -r requirements.txt
-```
+## Description
 
-make the required migrations
-```
-python manage.py makemigrations blog users
-```
-```
-python manage.py migrate
-```
-```
-python manage.py migrate --run-syncdb
-```
+BlogHub is built using the Django framework which allows users to perform basic CRUD (Create, Read, Update, Delete) operations on blog posts.
+In addition, your website includes user registration and login functionality.
+BlogHub's user interface is designed to be intuitive and easy to use. Users can navigate between different pages on your website using a simple menu system.
 
-run the server
-```
-python manage.py runserver
-```
+## Technologies used 
++ Django
+---
+#### [Contribution](./docs/CONTRIBUTE.md)
+---

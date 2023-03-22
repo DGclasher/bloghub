@@ -4,11 +4,13 @@
     Register
 {% endblock title %}
 {% block body %}
-    <h1>Register for BlogHub</h1>
-    <div class="content-section" id="register">
+ 
+<div id="container" style="position: absolute; top: 30%; left: 40%;">
+    <div class="form-wrap">
+        <h1>Sign Up for Bloghub</h1>
         <form action="{% url 'users:users-register' %}" method="post">
             {% csrf_token %}
-            <fieldset class="form-group">
+            
                 <legend class="border-bottom mb4">Register</legend>
                 {{ form|crispy }}
             </fieldset>
