@@ -1,110 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/f9b106e57d.js" crossorigin="anonymous"></script>
 
-    <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
     {% load static %}
     <link rel="stylesheet" href="{% static 'blog/style.css' %}" />
 
     <title>bloghub - {% block title %} {% endblock title %}</title>
+
   </head>
-  <body>
-    <nav>
-      <label class="logo">BlogHub </label>
-      <ul>
-        <li><a class="active" href="{% url 'blog:blog-home' %}">Home </a></li>
-        <li><a href="{% url 'blog:blog-about' %}">About </a></li>
-        {% if user.is_authenticated %}
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 
-        <li>
-          <a href="{% url 'blog:post-create' %}">New Post</a>
-        </li>
-
-        <li>
-          <a href="{% url 'users:users-profile' %}">Profile</a>
-        </li>
-        <li>
-          <a href="{% url 'users:users-logout' %}">Logout</a>
-        </li>
-
-        {% else %}
-
-        <li>
-          <a href="{% url 'users:users-login' %}">Sign in</a>
-        </li>
-
-        <li>
-          <a href="{% url 'users:users-register' %}">Sign up</a>
-        </li>
-
-        {% endif %}
-      </ul>
-
-      <label id="icon">
+  </style>
+  <body class="font-[Montserrat] bg-zinc-900 text-white">
+    
+    <nav class="bg-slate-900 h-20 w-full fixed">
+      <input type="checkbox" id="check" hidden>
+      <label for="check" class="float-right text-white text-3xl leading-[80px] mr-10 lg:hidden ">
         <i class="fas fa-bars"></i>
       </label>
+      
+      <label for="" class="text-white leading-[80px] pl-12 md:pl-24 md:text-4xl text-2xl md:leading-[80px]"><a href="{% url 'blog:blog-home' %}">BlogHub</a></label>
+
+      <ul class="float-right mr-10 lg:flex leading-[80px]  space-x-4 text-white uppercase rounded fixed lg:relative h-[100vh] lg:h-0 w-[100%] lg:w-fit top-20 lg:top-0 left-[-100%] lg:left-0 transition-all duration-300 lg:transition-none text-center bg-slate-700">
+        <li class=""><a href="{% url 'blog:blog-home' %}">Home</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'blog:post-create' %}">New Post</a></li>
+        <li><a href="{% url 'users:users-profile' %}">Profile</a></li>
+        <li><a href="{% url 'users:users-logout' %}">Logout</a></li>
+        {% else %}
+        <li><a href="{% url 'users:users-register' %}">Register</a></li>
+        <li><a href="{% url 'users:users-login' %}">Login</a></li>
+        {% endif %}
+      </ul>
     </nav>
+    
+    <div class="col-md-8 p-5">
+      {% if messages %} {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} items-center">{{ message }}</div>
+      {% endfor %} {% endif %}
+    </div>
+    <div class="p-10 w-full h-120">{% block body %} {% endblock body %}</div>
+ 
 
-    <!-- <section class="bg-main">
-      <div class="row">
-        <div class="col-lg-6">
-          <h1>BlogHub - A new model for publishing</h1>
-          <h7>You always own youe intellectual property, mailing list,and subscriber payments.
-            With full editorial control and no gatekeepers,you can do the work you most believe in.</h7> -->
-          <!-- <button type="button">Create your blog now</button>
-        </div>
-
-        <div class="col-lg-6">
-          <img
-            class="title-image"
-            src="/media/hero_image.png"
-            alt=""
-            height="500vh"
-            width="500vw"
-          />
-        </div>
-      </div>
-    </section> -->
-
-    <section class="blog-part">
-      <div class="col-md-8">
-        {% if messages %} {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-        {% endfor %} {% endif %}
-      </div>
-      <div class="container">{% block body %} {% endblock body %}</div>
-    </section>
-
-    <!-- <section class="footer-part"></section> -->
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"
-    ></script>
   </body>
 </html>
