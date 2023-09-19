@@ -3,33 +3,28 @@
 ## Steps to perform
 
 + Fork this repository
-
 + Clone the repository
   ```
   git clone git@github.com:[YOUR USERNAME]/bloghub.git
   ```
-  
-+ Install the requirements
++ On the root of project create `.env` file, refer to [this](../.env.example) for creating `.env`.
++ For `SECRET_KEY`, get one from [here](https://djecrety.ir/)
++ Create python virtual env and activate
+  ```
+  python3 -m venv venv && source venv/bin/activate
+  ```
++ Install dependencies
   ```
   pip install -r requirements.txt
   ```
-
-+ Make the required migrations
-  ```
-  python manage.py makemigrations
-  ```
++ Migrate DB
   ```
   python manage.py migrate
   ```
-  ```
-  python manage.py migrate --run-syncdb
-  ```
-
 + Collect the static files
   ```
   python manage.py collectstatic
   ```
-
 + To run the development server
   ```
   python manage.py runserver

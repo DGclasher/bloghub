@@ -12,4 +12,3 @@ BlogHub's user interface is designed to be intuitive and easy to use. Users can 
 + Django
 ---
 #### [Contribution](./docs/CONTRIBUTE.md)
----

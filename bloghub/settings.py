@@ -1,15 +1,15 @@
-from pathlib import Path
 import os
+from pathlib import Path
 from decouple import config
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Development secret key
-SECRET_KEY = "m=qz&x9dbp+3^glot^+b+o-mjfebe=!02ywt9^k#-eww-ihmb3"
+SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = True
-
-ALLOWED_HOSTS = []
+DEBUG = int(config('DEBUG'))
+HOSTS = config('HOSTS')
+ALLOWED_HOSTS = [] if DEBUG else HOSTS.split(',')
 
 INSTALLED_APPS = [
     'users',
@@ -54,13 +54,24 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'bloghub.wsgi.application'
 
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if config('DATABASE') == "postgresql":
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': config('POSTGRES_DB'),
+            'USER': config('POSTGRES_USER'),
+            'PASSWORD': config('POSTGRES_PASSWORD'),
+            'HOST': config('DB_HOST'),
+            'PORT': int(config('DB_PORT')),
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -109,10 +120,12 @@ LOGIN_REDIRECT_URL = 'blog:blog-home'
 LOGIN_URL = 'users:users-login'
 
 # Mail Service
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "test@email.com"
-EMAIL_HOST_PASSWORD = "testpasswd"
-
+user = config('BLOGHUB_EMAIL')
+password = config('BLOGHUB_PASS')
+if user != '' and password != '':
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+    EMAIL_HOST_USER = user
+    EMAIL_HOST_PASSWORD = password
