@@ -1,11 +1,16 @@
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
-from django.urls import reverse
-from django.contrib import messages
 from .forms import *
-from django.contrib.auth.decorators import login_required
 from .models import *
 from  blog.models import *
+from django.urls import reverse
+from django.shortcuts import render
+from django.contrib import messages
+from django.http import HttpResponseRedirect
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.decorators import login_required
+
+class CustomLogin(LoginView):
+    template_name = "users/login.html"
+    form_class = LoginForm
 
 def register(request):
     if request.method == "POST":

@@ -1,8 +1,6 @@
 .env
 venv
-*/__pycache__
-*/migrations
-db.sqlite3
 media
 static
-
+db.sqlite3
+**/__pycache__
